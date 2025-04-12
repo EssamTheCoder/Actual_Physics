@@ -157,7 +157,7 @@ def Temprature_Unit_Converter(temprature: float, input_unit: str, output_unit: s
         <h1>Temprature Unit Converter</h1>
         
         <h2>Purpose</h2>
-        To convert between the three main temprature units, Kelvin, Celsius, and Fahrenheit
+        To convert between the three main temprature units, Kelvin (K), Celsius (C), and Fahrenheit (F)
         
         <h2>Inputs</h2>
             <b>temprature</b> (float): the temprature, measured in the input_unit <br>
@@ -237,6 +237,24 @@ def Temprature_Unit_Converter(temprature: float, input_unit: str, output_unit: s
     else:
         return "one of your units is invalid, valid units of measure are: Celsius (C), Fahrenheit (F), and Kelvin (K)"
 
+def Power_Unit_Coverter(power: float, input_unit: str, output_unit: str):
+    """
+    <h1>Power Unit Converter</h1
+
+    <h2>Inputs</h2>
+        <b>power</b> (float): The amount of power, measured in the input unit
+        <b>input_unit</b> (str): The unit used to measure the power variable
+        <b>output_unit</b> (str): The unit that you convert the power variable to.
+
+    <h2>Output</h2>
+        The power unit converted to the output unit (float)
+        
+    <h2>All Valid Units of Power</h2>
+    Kilowatt (kW): 1 kilowatt is equal to 1000 watts.
+    Megawatt (MW): 1 megawatt is equal to 1,000,000 watts.
+    Gigawatt (GW): 1 gigawatt is equal to 1,000,000,000 watts.
+    Microwatt (µW), Milliwatt (mW): Smaller units of watts
+    """
 
 
 # Efficiency
@@ -398,42 +416,3 @@ def Get_KWh(time: float, time_unit: str, power: float, power_unit: str, price_pe
         time (converted to hours) * power (converted to kW) * price_per_KW
     """
     
-    #Power
-    Power_Units = ["kw","w"] #All valid power units
-    real_power_unit = power_unit.lower() #The power unit inputted, but in lowercase
-    
-    #Time
-    Time_Units = ["day","hr","min","sec"] #All vaild time units
-    real_time_unit = time_unit.lower() #The time unit inputted, but in lowecase
-    
-    def Power_Unit_Converter(num: float, input_unit: str):
-        Power_Unit_Conversion = {
-            "kw": 1,
-            "w": 1000
-        }
-        
-        return num / Power_Unit_Conversion.get(input_unit) 
-    
-    def Time_Unit_Converter(num: float, input_unit: str):
-        Time_Unit_Conversion = {
-            "day": 1/24,
-            "hr": 1,
-            "min": 60,
-            "sec": 3600
-        }
-
-        return num / Time_Unit_Conversion.get(input_unit)
-
-    
-        
-    if (real_power_unit in Power_Units) and (real_time_unit in Time_Units): #Both valid
-        return Power_Unit_Converter(power,real_power_unit) * Time_Unit_Converter(time,real_time_unit) * price_per_KW
-    
-    elif (real_power_unit in Power_Units) and (real_time_unit not in Time_Units): #Power valid, time invalid
-        print(Fore.RED,"Time unit must be valid",Fore.RESET)
-    
-    elif (real_power_unit not in Power_Units) and (real_time_unit in Time_Units): #Power invalid, time valid
-        print(Fore.RED,"Power unit must be valid",Fore.RESET)
-    
-    elif (real_power_unit not in Power_Units) and (real_time_unit not in Time_Units): #Both invalid
-        print(Fore.RED,"Power and time units must be valid",Fore.RESET)
